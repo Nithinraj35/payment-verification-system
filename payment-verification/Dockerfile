@@ -1,9 +1,9 @@
 FROM eclipse-temurin:17-jdk-alpine
 WORKDIR /app
-COPY .mvn/ .mvn
-COPY mvnw pom.xml ./
+COPY payment-verification/.mvn/ .mvn
+COPY payment-verification/mvnw payment-verification/pom.xml ./
 RUN ./mvnw dependency:go-offline
-COPY src ./src
+COPY payment-verification/src ./src
 RUN ./mvnw clean package -DskipTests
 EXPOSE 8080
 CMD ["java", "-jar", "target/payment-verification-1.0.0.jar"]
